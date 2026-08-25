@@ -1,4 +1,4 @@
-import { Globe, type LucideIcon } from "lucide-react";
+import { Globe } from "lucide-react";
 import { Github } from "./Icons";
 import type { Project } from "../data/content";
 
@@ -34,13 +34,13 @@ export default function ProjectCard({
         <div className="mt-6 flex items-center justify-between">
           <div className="flex gap-2">
             {deploy && (
-              <a href={deploy} target="_blank" rel="noreferrer" title="Acessar projeto">
-                <IconButton icon={Globe} />
+              <a href={deploy} target="_blank" rel="noreferrer" aria-label={`Acessar ${title}`} className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-slate-400 transition-colors hover:border-accent/40 hover:text-accent">
+                <Globe size={15} />
               </a>
             )}
             {github && (
-              <a href={github} target="_blank" rel="noreferrer" title="Ver código fonte">
-                <IconButton icon={Github} />
+              <a href={github} target="_blank" rel="noreferrer" aria-label={`Ver código-fonte de ${title}`} className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-slate-400 transition-colors hover:border-accent/40 hover:text-accent">
+                <Github size={15} />
               </a>
             )}
           </div>
@@ -58,13 +58,5 @@ export default function ProjectCard({
         </div>
       </div>
     </article>
-  );
-}
-
-function IconButton({ icon: Icon }: { icon: LucideIcon }) {
-  return (
-    <button className="flex h-9 w-9 items-center justify-center rounded-full border border-border text-slate-400 transition-colors hover:border-accent/40 hover:text-accent">
-      <Icon size={15} />
-    </button>
   );
 }

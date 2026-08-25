@@ -59,19 +59,22 @@ function ContactForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [statusMsg, setStatusMsg] = useState("");
+  const [hasError, setHasError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSending(true);
     setStatusMsg("");
+    setHasError(false);
     try {
       await sendContactMessage({ name, email, message });
       setStatusMsg("Mensagem enviada com sucesso!");
       setName("");
       setEmail("");
       setMessage("");
-    } catch (err) {
-      setStatusMsg("Erro ao enviar mensagem. Tente novamente.");
+    } catch (error) {
+      setHasError(true);
+      setStatusMsg(error instanceof Error ? error.message : "Erro ao enviar mensagem. Tente novamente.");
     } finally {
       setIsSending(false);
     }
@@ -82,14 +85,16 @@ function ContactForm() {
       className="space-y-5 rounded-xl border border-border bg-surface p-8"
       onSubmit={handleSubmit}
     >
-      <Field label={form.nameLabel} placeholder={form.namePlaceholder} value={name} onChange={(e) => setName(e.target.value)} required />
-      <Field label={form.emailLabel} placeholder={form.emailPlaceholder} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+      <Field id="contact-name" label={form.nameLabel} placeholder={form.namePlaceholder} value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" required />
+      <Field id="contact-email" label={form.emailLabel} placeholder={form.emailPlaceholder} type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required />
 
       <div>
-        <label className="mb-2 block font-mono text-xs text-slate-400">
+        <label htmlFor="contact-message" className="mb-2 block font-mono text-xs text-slate-400">
           {form.messageLabel}
         </label>
         <textarea
+          id="contact-message"
+          name="message"
           rows={4}
           placeholder={form.messagePlaceholder}
           value={message}
@@ -114,28 +119,33 @@ function ContactForm() {
           </>
         )}
       </button>
-      {statusMsg && <p className="text-sm mt-4 text-center text-slate-300">{statusMsg}</p>}
+      {statusMsg && <p aria-live="polite" className={`mt-4 text-center text-sm ${hasError ? "text-red-300" : "text-emerald-300"}`}>{statusMsg}</p>}
     </form>
   );
 }
 
 interface FieldProps {
+  id: string;
   label: string;
   placeholder: string;
   type?: string;
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  autoComplete?: string;
   required?: boolean;
 }
 
-function Field({ label, placeholder, type = "text", value, onChange, required }: FieldProps) {
+function Field({ id, label, placeholder, type = "text", value, onChange, autoComplete, required }: FieldProps) {
   return (
     <div>
-      <label className="mb-2 block font-mono text-xs text-slate-400">{label}</label>
+      <label htmlFor={id} className="mb-2 block font-mono text-xs text-slate-400">{label}</label>
       <input
+        id={id}
+        name={id}
         type={type}
         value={value}
         onChange={onChange}
+        autoComplete={autoComplete}
         required={required}
         placeholder={placeholder}
         className="w-full rounded-md border border-border bg-background px-4 py-3 text-sm text-slate-200 placeholder:text-slate-600 focus:border-accent/50 focus:outline-none"

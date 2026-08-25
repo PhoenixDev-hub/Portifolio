@@ -22,9 +22,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <button className="rounded-md border border-accent/40 px-4 py-2 font-mono text-xs text-accent transition-colors hover:bg-accent/10">
+        <a href="#contato" className="rounded-md border border-accent/40 px-4 py-2 font-mono text-xs text-accent transition-colors hover:bg-accent/10">
           {nav.cta}
-        </button>
+        </a>
       </div>
     </header>
   );
