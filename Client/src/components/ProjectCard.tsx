@@ -17,7 +17,7 @@ export default function ProjectCard({
         <img 
           src={image} 
           alt={`Preview de ${title}`} 
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105 opacity-60 group-hover:opacity-100"
         />
       </div>
 
