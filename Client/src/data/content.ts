@@ -86,13 +86,18 @@ export const skills = {
   ],
 };
 
+import dualLibrasImg from "../assets/DualLibrasHome.png";
+import sistemaBibliotecaImg from "../assets/SistemaBiblioteca.png";
+import plurimentesImg from "../assets/PlurimentesHome.png";
+
 export interface Project {
   id: string;
   title: string;
   desc: string;
   stack: string[];
-  highlight: string;
-  gradient: string;
+  image: string;
+  deploy?: string;
+  github?: string;
 }
 
 export const projects = {
@@ -103,21 +108,28 @@ export const projects = {
   items: [
     {
       id: "01",
-      title: "Projeto 1",
-      desc: "Descrição do seu primeiro projeto aqui. Atualize quando tiver mais detalhes.",
-      stack: ["React", "TypeScript", "Node.js"],
-      highlight:
-        "Destaque alguma funcionalidade técnica interessante ou desafio resolvido.",
-      gradient: "from-emerald-900/40 via-slate-900 to-slate-950",
+      title: "DualLibras",
+      desc: "Aplicação de transcrição em tempo real com tradução para Libras, desenvolvida para auxiliar alunos surdos em ambientes educacionais. Captura áudio do professor, transcreve usando IA e traduz em tempo real para Libras usando a integração VLibras.",
+      stack: ["React", "TypeScript", "TailwindCSS", "Python", "WebSocket", "AssemblyAI"],
+      image: dualLibrasImg,
+      deploy: "https://duallibrasai.vercel.app/",
+      github: "https://github.com/PhoenixDev-hub/DualLibras.AI",
     },
     {
       id: "02",
-      title: "Projeto 2",
-      desc: "Descrição do seu segundo projeto. Pode ser uma API, um frontend complexo, etc.",
-      stack: ["React", "TailwindCSS", "Postgres"],
-      highlight:
-        "Implementação de um sistema completo de autenticação com JWT e rotas protegidas.",
-      gradient: "from-sky-900/40 via-slate-900 to-slate-950",
+      title: "Sistema da Biblioteca",
+      desc: "Sistema web para gerenciamento de biblioteca escolar/acadêmica, com catálogo digital, reservas, empréstimos, leitores, notificações, dúvidas e configurações administrativas.",
+      stack: ["React", "Vite", "TailwindCSS", "Node.js", "Express", "Prisma", "PostgreSQL", "Zod", "JWT"],
+      image: sistemaBibliotecaImg,
+      github: "https://github.com/PhoenixDev-hub/ProjectLibrey",
+    },
+    {
+      id: "03",
+      title: "Plurimentes",
+      desc: "Um sistema que trabalha com neurodivergentes, focando no desenvolvimento e integração. Contribuição no front-end e no back-end.",
+      stack: ["React", "Vite", "TailwindCSS", "TypeScript", "Express", "Nodemailer"],
+      image: plurimentesImg,
+      github: "https://github.com/Ninhay/Projeto-PluriMentes",
     },
   ] as Project[],
 };
