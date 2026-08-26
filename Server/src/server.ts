@@ -12,6 +12,7 @@ if (!frontendUrl) {
 }
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(cors({ origin: frontendUrl, methods: ["POST"], allowedHeaders: ["Content-Type"], maxAge: 600 }));
 app.use(express.json({ limit: "10kb" }));
 
