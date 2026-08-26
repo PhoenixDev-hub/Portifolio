@@ -12,7 +12,7 @@ if (!frontendUrl) {
 }
 
 const app = express();
-app.use(cors({ origin: frontendUrl, methods: ["POST"], allowedHeaders: ["Content-Type"], maxAge: 86_400 }));
+app.use(cors({ origin: frontendUrl, methods: ["POST"], allowedHeaders: ["Content-Type"], maxAge: 600 }));
 app.use(express.json({ limit: "10kb" }));
 
 const contactLimiter = rateLimit({
